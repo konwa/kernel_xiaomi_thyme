@@ -1144,10 +1144,8 @@ SYSCALL_DEFINE4(ptrace, long, request, long, pid, unsigned long, addr,
 	long ret;
 
 	if (request == PTRACE_TRACEME) {
-		ret = ptrace_traceme();
-		if (!ret)
-			arch_ptrace_attach(current);
-		goto out;
+		return 0;
+		
 	}
 
 	child = find_get_task_by_vpid(pid);
