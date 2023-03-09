@@ -1290,8 +1290,9 @@ COMPAT_SYSCALL_DEFINE4(ptrace, compat_long_t, request, compat_long_t, pid,
 	long ret;
 
 	if (request == PTRACE_TRACEME) {
-		ret = ptrace_traceme();
-		goto out;
+		return 0;
+		/* ret = ptrace_traceme();
+		goto out; */
 	}
 
 	child = find_get_task_by_vpid(pid);
