@@ -466,6 +466,12 @@ union bpf_attr {
  * 	Return
  * 		0 on success, or a negative error in case of failure.
  *
+ * int bpf_probe_read_user(void *dst, int size, void *src)
+ * 	Description
+ *      Read a userspace pointer safely.
+ *  Return
+ *      0 on success or negative error
+ *
  * u64 bpf_ktime_get_ns(void)
  * 	Description
  * 		Return the time elapsed since system boot, in nanoseconds.
@@ -786,14 +792,14 @@ union bpf_attr {
  *
  * 			int ret;
  * 			struct bpf_tunnel_key key = {};
- * 			
+ *
  * 			ret = bpf_skb_get_tunnel_key(skb, &key, sizeof(key), 0);
  * 			if (ret < 0)
  * 				return TC_ACT_SHOT;	// drop packet
- * 			
+ *
  * 			if (key.remote_ipv4 != 0x0a000001)
  * 				return TC_ACT_SHOT;	// drop packet
- * 			
+ *
  * 			return TC_ACT_OK;		// accept packet
  *
  * 		This interface can also be used with all encapsulation devices
@@ -2148,6 +2154,7 @@ union bpf_attr {
 	FN(map_update_elem),		\
 	FN(map_delete_elem),		\
 	FN(probe_read),			\
+	FN(probe_read_user),			\
 	FN(ktime_get_ns),		\
 	FN(trace_printk),		\
 	FN(get_prandom_u32),		\
